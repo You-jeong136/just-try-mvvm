@@ -7,4 +7,16 @@ data class Diary(
     val title : String,
     val content : String,
     val created : Date
-)
+){
+    companion object {
+        fun createEmpty(
+            id: String = UUID.randomUUID().toString(),
+            createDate: Date = Date(),
+        ): Diary = Diary(
+            id,
+            "",
+            "",
+            createDate,
+        )
+    }
+}

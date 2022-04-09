@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.study.aos.mvvm">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- usescleartextTraffic 해야 http 써도 안 터짐. -->
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

@@ -10,7 +10,7 @@ import androidx.activity.viewModels
 import com.study.aos.mvvm.data.DiaryMemory
 import com.study.aos.mvvm.databinding.ActivityEditDiaryBinding
 import com.study.aos.mvvm.domain.Diary
-import com.study.aos.mvvm.util.EditDiaryViewModel
+import com.study.aos.mvvm.presentation.EditDiaryViewModel
 import java.util.*
 
 class EditDiaryActivity : AppCompatActivity() {

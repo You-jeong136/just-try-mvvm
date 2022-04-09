@@ -12,7 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.study.aos.mvvm.DiariesAdapter
 import com.study.aos.mvvm.data.DiariesLocalSource
+import com.study.aos.mvvm.data.DiaryMemory
 import com.study.aos.mvvm.data.db.DailyDiaryDataBase
+import com.study.aos.mvvm.data.entity.DiaryEntity
 import com.study.aos.mvvm.databinding.ActivityMainBinding
 import com.study.aos.mvvm.domain.Diary
 import java.util.*
@@ -51,13 +53,12 @@ class DiaryActivity : AppCompatActivity() {
             diariesAdapter.submitList(it)
         }
 
-
-        //db 임시코드
+        /*//db 임시코드 _ 5wnck
         val dao = DailyDiaryDataBase.newInstance(this).getDiariesDao()
-      /*  Log.d("*********MAIN_DAILY_DAIRY_DB ", "${dao.getAllDiaries()}")
+        Log.d("*********MAIN_DAILY_DAIRY_DB ", "${dao.getAllDiaries()}")
         dao.insertDiary(DiaryEntity("title", "conent", Date()))
         Log.d("*********MAIN_DAILY_DAIRY_DB ", "${dao.getAllDiaries()}")
-       */
+
         val diariesLocalSource = DiariesLocalSource(dao)
         val diary = Diary("1", "2", "3", Date())
         diariesLocalSource.saveDiary(
@@ -77,20 +78,19 @@ class DiaryActivity : AppCompatActivity() {
             onFailure = {
                 Log.d("*********MAIN_DAILY_DAIRY_DB ", "save fail")
             }
-        )
+        )*/
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
     fun initView(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.rvMainDiary.adapter = DiariesAdapter(::onDiaryClick).also { diariesAdapter = it }
         binding.btnMainDiaryNew.setOnClickListener { deployEditDiaryActivity() }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        diariesViewModel.loadDiaries()
     }
 
     private fun deployEditDiaryActivity(diary: Diary? = null) {

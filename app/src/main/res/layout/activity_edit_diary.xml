@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.study.aos.mvvm.util.EditDiaryViewModel" />
+            type="com.study.aos.mvvm.presentation.EditDiaryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
