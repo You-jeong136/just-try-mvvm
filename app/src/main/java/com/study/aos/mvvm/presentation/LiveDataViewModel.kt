@@ -20,7 +20,6 @@ class LiveDataViewModel : ViewModel() {
     //태초에 liveData 이전에 observale필드가 있었다.
     val cnt = ObservableInt()
 
-
     //내부에서만 변경가능하고, 외부에서는 변경이 불가능한 형태의 변수를 쓰임을 노출시키고 싶을때 변수명에 _(언더바)를 붙임.
 
     init {
