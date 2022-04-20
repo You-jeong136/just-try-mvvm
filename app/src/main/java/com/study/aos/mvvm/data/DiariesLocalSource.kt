@@ -10,7 +10,7 @@ class DiariesLocalSource (
     private val diariesDao : DiariesDao,
     private val dispatchExecutors: DispatchExecutors = DispatchExecutors.getInstance()
 ){
-    fun getDiary(
+    /*fun getDiary(
         diaryId : String, onSuccess : (Diary?) -> Unit, onFailure : (Throwable) -> Unit,
     ) {
         dispatchExecutors.ioThread.execute {
@@ -18,7 +18,7 @@ class DiariesLocalSource (
             //-> 따라서 콜백을 사용해서 해야함. (성공 / 실패 시 값을 넘겨주기 위해)
             try {
                 val diaryEntity = diariesDao.getDiary(diaryId)
-                /*
+                *//*
                 val diary = diaryEntity.takeIf { it == null }
                     ?.let {
                         Diary(
@@ -28,7 +28,7 @@ class DiariesLocalSource (
                             created = it.createDate
                         )
                     }
-                */
+                *//*
                 dispatchExecutors.mainThread.execute {
                     onSuccess(diaryEntity.toDiary())
                 }
@@ -37,8 +37,8 @@ class DiariesLocalSource (
             }
 
         }
-    }
-    fun saveDiary(
+    }*/
+    /*fun saveDiary(
         diary : Diary,
         onSuccess: () -> Unit,
         onFailure: (Throwable) -> Unit
@@ -56,11 +56,11 @@ class DiariesLocalSource (
                 }
             }
         }
-    }
+    }*/
     //db의 실행은 메인이 아닌 스레드에서 수행. 결과값은 메인에서 실행해야한다.
     //에러 핸들링은은 최대한 상세하게 해야 좋다. catch(e : Exception)은 해선 안되는 코드...
 
-    fun getDiary(
+   /* fun getDiary(
         diaryId: String,
         onResult : (Result<Diary?>)-> Unit,
     ){
@@ -74,7 +74,7 @@ class DiariesLocalSource (
                 }
 
 
-              /*  .onSuccess { entitiy : DiaryEntity? ->
+              *//*  .onSuccess { entitiy : DiaryEntity? ->
                     //성공시 결과물은 메인에서..
                     dispatchExecutors.mainThread.execute{
 
@@ -83,11 +83,11 @@ class DiariesLocalSource (
                 }
                 .onFailure { exception ->
 
-                }*/
+                }*//*
         }
 
 
-    }
+    }*/
 
 
     private fun Diary.toDiaryEntity(): DiaryEntity = DiaryEntity(

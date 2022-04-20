@@ -7,8 +7,4 @@ data class DailyResponse (
     val title : String,
     val content : String,
     val created : Long,
-)/*{
-    init {
-        Date().time
-    }
-}*/
+)

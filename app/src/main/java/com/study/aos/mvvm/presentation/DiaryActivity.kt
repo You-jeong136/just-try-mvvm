@@ -1,6 +1,7 @@
 package com.study.aos.mvvm.presentation
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,13 +11,17 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.study.aos.mvvm.DiariesAdapter
 import com.study.aos.mvvm.data.DiariesLocalSource
 import com.study.aos.mvvm.data.DiaryMemory
 import com.study.aos.mvvm.data.db.DailyDiaryDataBase
 import com.study.aos.mvvm.data.entity.DiaryEntity
+import com.study.aos.mvvm.data.remote.service.DailyDiaryService
 import com.study.aos.mvvm.databinding.ActivityMainBinding
 import com.study.aos.mvvm.domain.Diary
+import java.lang.IllegalArgumentException
 import java.util.*
 
 class DiaryActivity : AppCompatActivity() {
@@ -27,7 +32,7 @@ class DiaryActivity : AppCompatActivity() {
     private lateinit var editDiaryActivityLauncher: ActivityResultLauncher<Intent>
 
 
-    private val diariesViewModel : DiariesViewModel by viewModels()
+    private val diariesViewModel : DiariesViewModel by viewModels { DiariesViewModelFactory(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,4 +135,21 @@ class DiaryActivity : AppCompatActivity() {
 
         )
     }*/
+
+    class DiariesViewModelFactory(
+        private val context : Context
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T{
+            return when(modelClass){
+                DiariesViewModel::class.java-> {
+                    DiariesViewModel(
+                        DailyDiaryDataBase.getInstance(context).getDiariesDao(),
+                        DailyDiaryService.getInstance(),
+                    )
+                }
+                else -> throw IllegalArgumentException("input class : ")
+            } as T
+
+        }
+    }
 }

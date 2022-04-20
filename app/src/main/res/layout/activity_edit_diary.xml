@@ -40,7 +40,7 @@
         android:id="@+id/tv_edit_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:createdDate="@{viewModel.createDate}"
+        app:createdDate="@{viewModel.diary.created}"
         android:text="@string/dateFormat"
         app:layout_constraintBottom_toTopOf="@+id/et_edit_title"
         app:layout_constraintEnd_toEndOf="@+id/et_edit_title" />
@@ -87,8 +87,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:text="@string/writeComplete"
-        android:onClick="@{()->viewModel.saveDiary()}"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="@{() -> viewModel.saveDiary()}"        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

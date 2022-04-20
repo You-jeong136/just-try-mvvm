@@ -27,11 +27,11 @@ class EditDiaryActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.lifecycleOwner = this
-        binding.btnEditSubmit.setOnClickListener {
+      /*  binding.btnEditSubmit.setOnClickListener {
             editDiaryViewModel.saveDiary()
             setResult(Activity.RESULT_OK)
             finish()
-        }
+        }*/
 
         binding.tvEditContent.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -48,26 +48,18 @@ class EditDiaryActivity : AppCompatActivity() {
 
         })
 
-        editDiaryViewModel.loadDiary(getDiaryId())
         binding.viewModel = editDiaryViewModel
+        editDiaryViewModel.loadDiary(getDiaryId())
 
-        editDiaryViewModel.title.observe(this){
-            Log.d("********Edit_Title", it)
+
+        editDiaryViewModel.editSuccessEvent.observe(this) {
+            setResult(Activity.RESULT_OK)
+            finish()
         }
     }
 
     private fun getDiaryId() : String? {
         return intent.getStringExtra(KEY_DIARY_ID)
-    }
-
-    private fun saveDiary(){
-        val diary = Diary(
-            id = UUID.randomUUID().toString(),
-            title = binding.tvEditContent.text.toString(),
-            content = binding.tvEditContent.text.toString(),
-            created = Date()
-        )
-        DiaryMemory.saveDiary(diary)
     }
 
     companion object{

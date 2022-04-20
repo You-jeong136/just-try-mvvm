@@ -12,7 +12,7 @@ interface DailyDiaryService {
 
     @GET("/diary")
     suspend fun getAllDiaries(
-        @Header("Authorization") token  : String? = null,
+        @Header(AUTHORIZATION) token  : String? = null,
     ) : Response<List<DailyResponse>>
     //okhttps를 가공한게 retrofit2 <- 즉 okhttp가 더 low level.
     //suspend 이전에 Call<>로 하는 것을 정확히 파악하는게 먼저이다.
@@ -25,18 +25,38 @@ interface DailyDiaryService {
 
     @POST("/diary")
     suspend fun saveDiary(
-        @Header("Authorization") token : String? = null,
-        @Body params : SaveDairyParams,
-    ) : Response<Unit>
+        @Header(AUTHORIZATION) token: String? = null,
+        @Body params: SaveDairyParams,
+    ): Response<Unit>
+
+
+    /* companion object {
+         private var instance : DailyDiaryService? = null
+         fun getInstance() : DailyDiaryService{
+             return instance?: synchronized(this){
+                 Retrofit.Builder().baseUrl("http://52.42.22.72:7373")//https가 아님. _ 근데 android에서 보안 문제로 이 막음.
+                     .addConverterFactory(GsonConverterFactory.create())
+                     .build()
+                     .create() //reified 어쩌구 덕분에 가능... _ 첫번째 create와 다른 점.
+             }
+         }
+     }*/
 
     companion object {
-        private var instance : DailyDiaryService? = null
-        fun getInstance() : DailyDiaryService{
-            return instance?: synchronized(this){
-                Retrofit.Builder().baseUrl("http://52.42.22.72:7373")//https가 아님. _ 근데 android에서 보안 문제로 이 막음.
+        private const val AUTHORIZATION = "Authorization"
+        private const val ID = "id"
+        private const val BASE_URL = "http://52.42.22.72:7373"
+
+        private var instance:  DailyDiaryService? = null
+
+        fun getInstance():  DailyDiaryService {
+            return instance ?: synchronized(this) {
+                Retrofit.Builder()
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-                    .create() //reified 어쩌구 덕분에 가능... _ 첫번째 create와 다른 점.
+                    .create< DailyDiaryService>()
+                    .also { instance = it }
             }
         }
     }
