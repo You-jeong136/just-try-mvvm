@@ -1,10 +1,9 @@
 package com.study.aos.mvvm.data
 
-import com.study.aos.mvvm.data.dao.DiariesDao
-import com.study.aos.mvvm.data.entity.DiaryEntity
-import com.study.aos.mvvm.data.executor.DispatchExecutors
+import com.study.aos.mvvm.data.local.dao.DiariesDao
+import com.study.aos.mvvm.data.local.entity.DiaryEntity
+import com.study.aos.mvvm.data.local.executor.DispatchExecutors
 import com.study.aos.mvvm.domain.Diary
-import java.lang.Exception
 
 class DiariesLocalSource (
     private val diariesDao : DiariesDao,

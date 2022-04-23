@@ -1,4 +1,4 @@
-package com.study.aos.mvvm.data.converter
+package com.study.aos.mvvm.data.local.converter
 
 import androidx.room.TypeConverter
 import java.util.*

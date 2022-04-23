@@ -1,4 +1,4 @@
-package com.study.aos.mvvm.data.entity
+package com.study.aos.mvvm.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

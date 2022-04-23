@@ -1,11 +1,10 @@
-package com.study.aos.mvvm.data.dao
+package com.study.aos.mvvm.data.local.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.study.aos.mvvm.data.entity.DiaryEntity
+import com.study.aos.mvvm.data.local.entity.DiaryEntity
 
 @Dao
 interface DiariesDao {

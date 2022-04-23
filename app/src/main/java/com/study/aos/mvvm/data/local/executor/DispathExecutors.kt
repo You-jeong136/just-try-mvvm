@@ -1,4 +1,4 @@
-package com.study.aos.mvvm.data.executor
+package com.study.aos.mvvm.data.local.executor
 
 import android.os.Handler
 import android.os.Looper

@@ -14,15 +14,12 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.study.aos.mvvm.DiariesAdapter
-import com.study.aos.mvvm.data.DiariesLocalSource
-import com.study.aos.mvvm.data.DiaryMemory
-import com.study.aos.mvvm.data.db.DailyDiaryDataBase
-import com.study.aos.mvvm.data.entity.DiaryEntity
+import com.study.aos.mvvm.data.local.db.DailyDiaryDataBase
 import com.study.aos.mvvm.data.remote.service.DailyDiaryService
+import com.study.aos.mvvm.data.repository.RealDiariesRepository
 import com.study.aos.mvvm.databinding.ActivityMainBinding
 import com.study.aos.mvvm.domain.Diary
 import java.lang.IllegalArgumentException
-import java.util.*
 
 class DiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -142,7 +139,7 @@ class DiaryActivity : AppCompatActivity() {
         override fun <T : ViewModel> create(modelClass: Class<T>): T{
             return when(modelClass){
                 DiariesViewModel::class.java-> {
-                    DiariesViewModel(
+                    RealDiariesRepository(
                         DailyDiaryDataBase.getInstance(context).getDiariesDao(),
                         DailyDiaryService.getInstance(),
                     )

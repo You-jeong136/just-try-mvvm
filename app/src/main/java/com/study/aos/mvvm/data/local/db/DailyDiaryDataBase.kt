@@ -1,13 +1,13 @@
-package com.study.aos.mvvm.data.db
+package com.study.aos.mvvm.data.local.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.study.aos.mvvm.data.converter.DateTypeConverter
-import com.study.aos.mvvm.data.dao.DiariesDao
-import com.study.aos.mvvm.data.entity.DiaryEntity
+import com.study.aos.mvvm.data.local.converter.DateTypeConverter
+import com.study.aos.mvvm.data.local.dao.DiariesDao
+import com.study.aos.mvvm.data.local.entity.DiaryEntity
 
 @Database(
     entities = [DiaryEntity::class], version = 1
